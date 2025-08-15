@@ -14,40 +14,50 @@ interface ActionResult {
 }
 
 export async function sendOtp(phoneNumber: string): Promise<ActionResult> {
-  await delay(1000);
-
   // E.164 format validation for Indian numbers
   if (!/^\+91[6-9]\d{9}$/.test(phoneNumber)) {
     return { success: false, error: 'Invalid phone number format. Please use E.164 format (e.g., +91XXXXXXXXXX).' };
   }
 
-  console.log(`Simulating sending OTP to ${phoneNumber} via POST https://flashback.inc:9000/api/mobile/sendOTP`);
-  
-  // In a real scenario, you'd make a fetch request like this:
-  /*
+  console.log(`Sending OTP to ${phoneNumber} via POST https://flashback.inc:9000/api/mobile/sendOTP`);
+
   try {
+    // This is a placeholder for a real refresh token you would have after a user logs in.
+    const refreshToken = 'your-refresh-token-if-available';
+    
+    // The fetch call is commented out as per the instructions to simulate the backend.
+    // To make a real API call, you would uncomment the following block.
+    /*
     const response = await fetch('https://flashback.inc:9000/api/mobile/sendOTP', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // 'Cookie': `refreshToken=${someToken}` // If a refresh token is available
+        'Cookie': `refreshToken=${refreshToken}`
       },
       body: JSON.stringify({ phoneNumber }),
     });
 
     if (response.ok) {
+      console.log('Successfully sent OTP.');
       return { success: true };
     } else {
       const errorData = await response.json();
-      return { success: false, error: errorData.message || 'Failed to send OTP.' };
+      const errorMessage = errorData.message || 'Failed to send OTP from API.';
+      console.error('API Error:', errorMessage);
+      return { success: false, error: errorMessage };
     }
-  } catch (error) {
-    return { success: false, error: 'An error occurred while sending the OTP.' };
-  }
-  */
+    */
+   
+    // Simulating success after a delay for the purpose of the hackathon flow.
+    await delay(1000);
+    console.log('Simulated sending OTP successfully.');
+    return { success: true };
 
-  // For simulation purposes, we assume success.
-  return { success: true };
+  } catch (error) {
+    console.error('An unexpected error occurred while sending the OTP:', error);
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return { success: false, error: `An error occurred while sending the OTP: ${errorMessage}` };
+  }
 }
 
 
