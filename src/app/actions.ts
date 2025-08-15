@@ -61,16 +61,11 @@ export async function sendOtp(phoneNumber: string): Promise<ActionResult> {
 export async function verifyOtp(phoneNumber: string, otp: string): Promise<ActionResult> {
   await delay(1500);
 
-  console.log(`Simulating verifying OTP ${otp} for ${phoneNumber}`);
+  console.log(`Simulating verifying OTP ${otp} for ${phoneNumber} - FORCING SUCCESS`);
   
-  // The prompt doesn't specify an OTP, so we'll use a hardcoded one for simulation.
-  if (otp === '123456') {
-    // In a real scenario, the API would return a JWT.
-    const fakeJwt = `fake-jwt-for-${phoneNumber}-${Date.now()}`;
-    return { success: true, token: fakeJwt };
-  } else {
-    return { success: false, error: 'Invalid or expired OTP. Please try again.' };
-  }
+  // Always succeed for the hackathon flow, as requested.
+  const fakeJwt = `fake-jwt-for-${phoneNumber}-${Date.now()}`;
+  return { success: true, token: fakeJwt };
 }
 
 export async function uploadSelfie(phoneNumber: string, image: string, token: string): Promise<ActionResult> {
