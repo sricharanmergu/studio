@@ -18,12 +18,35 @@ export async function sendOtp(phoneNumber: string): Promise<ActionResult> {
 
   // E.164 format validation for Indian numbers
   if (!/^\+91[6-9]\d{9}$/.test(phoneNumber)) {
-    return { success: false, error: 'Invalid phone number format. Use +91XXXXXXXXXX.' };
+    return { success: false, error: 'Invalid phone number format. Please use E.164 format (e.g., +91XXXXXXXXXX).' };
   }
 
-  console.log(`Simulating sending OTP to ${phoneNumber}`);
-  // In a real scenario, you'd call:
-  // POST https://flashback.inc:9000/api/mobile/sendOTP
+  console.log(`Simulating sending OTP to ${phoneNumber} via POST https://flashback.inc:9000/api/mobile/sendOTP`);
+  
+  // In a real scenario, you'd make a fetch request like this:
+  /*
+  try {
+    const response = await fetch('https://flashback.inc:9000/api/mobile/sendOTP', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Cookie': `refreshToken=${someToken}` // If a refresh token is available
+      },
+      body: JSON.stringify({ phoneNumber }),
+    });
+
+    if (response.ok) {
+      return { success: true };
+    } else {
+      const errorData = await response.json();
+      return { success: false, error: errorData.message || 'Failed to send OTP.' };
+    }
+  } catch (error) {
+    return { success: false, error: 'An error occurred while sending the OTP.' };
+  }
+  */
+
+  // For simulation purposes, we assume success.
   return { success: true };
 }
 

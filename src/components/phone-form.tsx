@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { sendOtp } from '@/app/actions';
@@ -39,7 +39,7 @@ export default function PhoneForm({ onSuccess }: PhoneFormProps) {
       if (result.success) {
         toast({
           title: 'OTP Sent!',
-          description: 'Please check your WhatsApp for the OTP.',
+          description: 'An OTP has been sent via WhatsApp to your number.',
         });
         onSuccess(data.phoneNumber);
       } else {
@@ -69,6 +69,9 @@ export default function PhoneForm({ onSuccess }: PhoneFormProps) {
               <FormControl>
                 <Input placeholder="+919876543210" {...field} />
               </FormControl>
+               <FormDescription>
+                OTP will be sent via Whatsapp.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
