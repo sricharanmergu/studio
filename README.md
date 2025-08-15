@@ -70,7 +70,3 @@ To get the application running locally, follow these steps:
     yarn dev
     ```
 
-4.  **Open the application:**
-    Open your browser and navigate to [http://localhost:9002](http://localhost:9002) (or the port specified in your terminal).
-
-No `.env` file or API keys are required as all backend services are simulated.
